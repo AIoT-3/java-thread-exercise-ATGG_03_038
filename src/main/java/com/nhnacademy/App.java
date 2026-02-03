@@ -23,6 +23,7 @@ public class App {
         // TODO #5 - AlertDaemon 스레드 객체를 생성하고 start() 메서드를 호출하여 실행합니다.
         AlertDaemon alertDaemon = null;
 
+
         Thread.currentThread().setName("my-thread");
         Counter counter = new Counter(10);
         counter.run();

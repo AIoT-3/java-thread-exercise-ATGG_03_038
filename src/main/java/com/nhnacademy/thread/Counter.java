@@ -28,6 +28,7 @@ public class Counter {
             throw new IllegalArgumentException();
         }
 
+
         this.countMaxSize = countMaxSize;
         this.count = 0L;
     }
