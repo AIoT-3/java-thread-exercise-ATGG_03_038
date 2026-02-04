@@ -21,7 +21,9 @@ public class SharedCounter {
 
     public SharedCounter(long count) {
         // TODO #1-1 생성자를 초기화합니다. count < 0이면 IllegalArgumentException이 발생합니다.
-
+        if(count < 0){
+            throw new IllegalArgumentException("count가 0보다 작을 수는 없습니다");
+        }
         this.count = count;
     }
 
@@ -31,7 +33,7 @@ public class SharedCounter {
      * @return 현재 카운트 값
      */
     // TODO #1-2 메서드 단위로 락을 걸고, count를 반환합니다.
-    public long getCount() {
+    public synchronized long getCount() {
         return count;
     }
 
@@ -40,7 +42,7 @@ public class SharedCounter {
              *
              * @return 증가된 카운트 값
              */
-            public long increaseAndGet() {
+            public synchronized long increaseAndGet() {
         // TODO #1-3 블록 단위로 락을 걸고 카운트를 1 증가시킨 후(count = count + 1) 증가된 값을 반환합니다.
         count = count + 1;
         return count;
@@ -51,7 +53,7 @@ public class SharedCounter {
              *
              * @return 감소된 카운트 값
              */
-            public long decreaseAndGet() {
+            public synchronized long decreaseAndGet() {
         // TODO #1-4 카운트 감소 연산(count = count - 1) 부분에만 락을 걸고, 감소된 값을 반환합니다.
         count = count - 1;
         return count;
