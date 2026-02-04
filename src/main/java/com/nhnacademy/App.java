@@ -38,6 +38,5 @@ public class App
         threadA.start();
         // TODO #8 threadB의 start() 메서드를 호출하여 스레드를 실행합니다.
         threadB.start();
-        
     }
 }
