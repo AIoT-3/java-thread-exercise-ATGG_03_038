@@ -18,11 +18,13 @@ import com.nhnacademy.thread.Counter;
 /**
  * 데몬 스레드와 일반 스레드를 활용한 애플리케이션 메인 클래스
  */
+
 public class App {
     public static void main(String[] args) {
         // TODO #5 - AlertDaemon 스레드 객체를 생성하고 start() 메서드를 호출하여 실행합니다.
-        AlertDaemon alertDaemon = null;
+        AlertDaemon alertDaemon = new AlertDaemon();
 
+        alertDaemon.start();
 
         Thread.currentThread().setName("my-thread");
         Counter counter = new Counter(10);
