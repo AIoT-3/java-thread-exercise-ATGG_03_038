@@ -55,7 +55,9 @@ public class App
         log.debug("threadB 상태: {}", threadB.getState());
 
         // TODO #1 메인 스레드가 threadA, threadB가 종료될 때까지 대기합니다. Thread.yield()를 사용합니다.
-
+        do{
+            Thread.yield();
+        }while(threadA.isAlive() || threadB.isAlive());
         // threadA, threadB가 종료되면 'Application exit!' 메시지를 출력합니다.
         log.debug("Application exit!");
 
