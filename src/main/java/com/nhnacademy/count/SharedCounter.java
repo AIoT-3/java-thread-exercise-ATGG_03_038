@@ -45,8 +45,10 @@ public class SharedCounter {
         }
         this.count = count;
         // TODO #1-1 세마포어를 생성합니다. (동시에 하나의 스레드만 접근할 수 있도록 permits 매개변수를 설정하세요.)
-        semaphore = null;
+        semaphore = new Semaphore(1);
     }
+
+
 
             /**
              * 현재 카운트 값을 반환합니다.
@@ -61,8 +63,21 @@ public class SharedCounter {
             2. 필요한 작업을 수행합니다.
             3. 작업이 완료되면 semaphore.release()를 호출하여 허가를 반환합니다.
          */
+                try{
+                    semaphore.acquire();
+                }catch(InterruptedException e){
+                    throw new RuntimeException(e);
+                }
 
-        return count;
+                try{
+                    return count;
+                }finally{
+                    semaphore.release();
+                }
+
+
+
+
     }
 
             /**
@@ -76,8 +91,18 @@ public class SharedCounter {
         /* TODO #1-3 카운트를 1 증가시키고(count = count + 1) 증가된 값을 반환합니다.
            1-2와 같이 세마포어를 이용하여 동기화를 구현합니다.
         */
-        count = count + 1;
-        return count;
+                try{
+                    semaphore.acquire();
+                }catch(InterruptedException e){
+                    throw new RuntimeException(e);
+                }
+
+                try{
+                    count += 1;
+                    return count;
+                }finally{
+                    semaphore.release();
+                }
     }
 
             /**
@@ -89,9 +114,20 @@ public class SharedCounter {
              */
             public long decreaseAndGet() {
         /* TODO #1-4 카운트를 1 감소시키고(count = count - 1) 감소된 값을 반환합니다.
+
           1-2와 같이 세마포어를 이용하여 동기화를 구현합니다.
         */
-        count = count - 1;
-        return count;
+                try{
+                    semaphore.acquire();
+                }catch(InterruptedException e){
+                    throw new RuntimeException(e);
+                }
+
+                try{
+                    count -= 1;
+                    return count;
+                }finally{
+                    semaphore.release();
+                }
     }
 }
